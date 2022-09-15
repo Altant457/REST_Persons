@@ -3,6 +3,7 @@ package facades;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import entities.Person;
+import errorhandling.PersonNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,7 +61,7 @@ class PersonFacadeTest {
     }
 
     @Test
-    void deletePerson() {
+    void deletePerson() throws PersonNotFoundException {
         assertEquals(3, facade.getAllPersons().getAll().size());
         facade.deletePerson(pd3.getId());
         assertEquals(2, facade.getAllPersons().getAll().size());
@@ -68,7 +69,7 @@ class PersonFacadeTest {
     }
 
     @Test
-    void getPerson() {
+    void getPerson() throws PersonNotFoundException {
         PersonDTO actual = facade.getPerson(pd2.getId());
         assertEquals(actual, pd2);
     }
@@ -80,7 +81,7 @@ class PersonFacadeTest {
     }
 
     @Test
-    void editPerson() {
+    void editPerson() throws PersonNotFoundException {
         pd1.setFirstname("Anders");
         pd1.setLastname("And");
         facade.editPerson(pd1);

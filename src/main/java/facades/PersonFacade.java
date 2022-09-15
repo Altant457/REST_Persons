@@ -3,6 +3,7 @@ package facades;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import entities.Person;
+import errorhandling.PersonNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +44,7 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public void deletePerson(int id) {
+    public boolean deletePerson(int id) throws PersonNotFoundException {
         EntityManager em = getEntityManager();
         try {
             Person person = em.find(Person.class, id);
@@ -51,8 +52,9 @@ public class PersonFacade implements IPersonFacade {
                 em.getTransaction().begin();
                 em.remove(person);
                 em.getTransaction().commit();
+                return true;
             } else {
-                throw new WebApplicationException(String.format("Person with id = %d doesn't exist", id));
+                throw new PersonNotFoundException(String.format("Person with id = %d doesn't exist", id));
             }
         } finally {
             em.close();
@@ -60,14 +62,14 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO getPerson(int id) {
+    public PersonDTO getPerson(int id) throws PersonNotFoundException {
         EntityManager em = getEntityManager();
         try {
             Person p = em.find(Person.class, id);
             if (p != null) {
                 return new PersonDTO(p);
             } else {
-                throw new WebApplicationException(String.format("Person with id = %d doesn't exist", id));
+                throw new PersonNotFoundException(String.format("Person with id = %d doesn't exist", id));
             }
         } finally {
             em.close();

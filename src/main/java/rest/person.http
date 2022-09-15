@@ -1,0 +1,29 @@
+### Gets all persons
+GET http://localhost:8080/devops_starter/api/persons
+Accept: application/json
+### Gets a person
+GET http://localhost:8080/devops_starter/api/persons/1
+Accept: application/json
+### Adds a person
+POST http://localhost:8080/devops_starter/api/persons
+Content-Type: application/json
+
+{
+  "firstname": "Rachelle",
+  "lastname": "Foster",
+  "phone": "(216) xxx-xxxx"
+}
+### Deletes a person
+DELETE http://localhost:8080/devops_starter/api/persons/1
+Accept: application/json
+
+### Updates a person
+PUT http://localhost:8080/devops_starter/api/persons/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "firstname": "Ismael",
+  "lastname": "Ocelot",
+  "phone": "(414) xxx-xxxx"
+}
