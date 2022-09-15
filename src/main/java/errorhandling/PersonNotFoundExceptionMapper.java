@@ -16,19 +16,13 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Override
     public Response toResponse(PersonNotFoundException ex) {
-        Response.StatusType type = getStatusType(ex);
         Logger.getLogger(PersonNotFoundExceptionMapper.class.getName())
                 .log(Level.SEVERE, null, ex);
-        ExceptionDTO err = new ExceptionDTO(type.getStatusCode(), type.getReasonPhrase());
-        return Response.status(type.getStatusCode())
+        ExceptionDTO err = new ExceptionDTO(404, ex.getMessage());
+        return Response
+                .status(404)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
-    }
-    private Response.StatusType getStatusType(Throwable ex) {
-        if (ex instanceof WebApplicationException) {
-            return ((WebApplicationException)ex).getResponse().getStatusInfo();
-        }
-        return Response.Status.INTERNAL_SERVER_ERROR;
     }
 }
