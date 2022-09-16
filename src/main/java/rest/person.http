@@ -9,8 +9,8 @@ POST http://localhost:8080/devops_starter/api/persons
 Content-Type: application/json
 
 {
-  "firstname": "Rachelle",
-  "lastname": "Foster",
+  "fName": "Rachelle",
+  "lName": "Foster",
   "phone": "(216) xxx-xxxx"
 }
 ### Deletes a person
@@ -22,8 +22,7 @@ PUT http://localhost:8080/devops_starter/api/persons/2
 Content-Type: application/json
 
 {
-  "id": 2,
-  "firstname": "Ismael",
-  "lastname": "Ocelot",
+  "fName": "Ismael",
+  "lName": "Ocelot",
   "phone": "(414) xxx-xxxx"
 }

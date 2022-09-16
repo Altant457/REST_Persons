@@ -4,7 +4,6 @@ import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import entities.Person;
 import errorhandling.PersonNotFoundException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -82,8 +79,8 @@ class PersonFacadeTest {
 
     @Test
     void editPerson() throws PersonNotFoundException {
-        pd1.setFirstname("Anders");
-        pd1.setLastname("And");
+        pd1.setfName("Anders");
+        pd1.setlName("And");
         facade.editPerson(pd1);
         assertEquals(facade.getPerson(pd1.getId()), pd1);
     }

@@ -94,8 +94,8 @@ public class PersonFacade implements IPersonFacade {
             Person person = em.find(Person.class, p.getId());
             if (person != null) {
                 em.getTransaction().begin();
-                person.setFirstname(p.getFirstname());
-                person.setLastname(p.getLastname());
+                person.setFirstname(p.getfName());
+                person.setLastname(p.getlName());
                 person.setPhone(p.getPhone());
                 em.merge(person);
                 em.getTransaction().commit();

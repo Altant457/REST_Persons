@@ -39,8 +39,10 @@ public class PersonResource {
     @Produces("application/json")
     public String addPerson(String input) {
         PersonDTO dto = GSON.fromJson(input, PersonDTO.class);
-        PersonDTO newDto = FACADE.addPerson(dto.getFirstname(), dto.getLastname(), dto.getPhone());
-        return GSON.toJson(newDto);
+        PersonDTO newDto = FACADE.addPerson(dto.getfName(), dto.getlName(), dto.getPhone());
+        String returnVal = GSON.toJson(newDto);
+        returnVal = "{" +returnVal.substring(returnVal.indexOf("\"firstname"));
+        return returnVal;
     }
     @DELETE
     @Path("{id}")
@@ -60,8 +62,9 @@ public class PersonResource {
     @Path("{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public String  editPerson(String person) {
+    public String  editPerson(String person, @PathParam("id") int id) {
         PersonDTO dto = GSON.fromJson(person, PersonDTO.class);
+        dto.setId(id);
         PersonDTO newDto = FACADE.editPerson(dto);
         return GSON.toJson(newDto);
     }
