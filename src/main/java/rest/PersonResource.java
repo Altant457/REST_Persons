@@ -41,7 +41,7 @@ public class PersonResource {
         PersonDTO dto = GSON.fromJson(input, PersonDTO.class);
         PersonDTO newDto = FACADE.addPerson(dto.getfName(), dto.getlName(), dto.getPhone());
         String returnVal = GSON.toJson(newDto);
-        returnVal = "{" +returnVal.substring(returnVal.indexOf("\"firstname"));
+        returnVal = "{" +returnVal.substring(returnVal.indexOf("\"fName"));
         return returnVal;
     }
     @DELETE
